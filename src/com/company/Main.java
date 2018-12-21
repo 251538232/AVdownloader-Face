@@ -37,7 +37,7 @@ public class Main {
 //        prop.setProperty("https.proxyHost", "192.168.137.1");
 //        prop.setProperty("https.proxyPort", "1080");
         //String encoding = "UTF-8";
-        File file = new File("/root/123.txt");//读取已下载影片
+        File file = new File(System.getProperty("user.dir")+"/Downloaded.log");//读取已下载影片
         Long filelength = file.length();
         byte[] filecontent = new byte[filelength.intValue()];
         String magnet,size,cache,downloaded="";
@@ -76,7 +76,7 @@ public class Main {
                                 }
                                 String bool="error",line=null;
                                  while ((bool.indexOf("True")==-1)&&(bool.indexOf("False")==-1)){
-                                    String[] args1 = new String[] { "python3", "/root/main_facepp.py", "1.jpg","65","40"};//调用Python脚本完成人脸识别
+                                    String[] args1 = new String[] { "python3", System.getProperty("user.dir")+"/main_facepp.py", "1.jpg","65","40"};//调用Python脚本完成人脸识别
                                     Process pr=Runtime.getRuntime().exec(args1);
                                     StreamCaptureThread errorStream = new StreamCaptureThread(pr.getErrorStream());
                                     StreamCaptureThread outputStream = new StreamCaptureThread(pr.getInputStream());
@@ -111,7 +111,7 @@ public class Main {
                                     RPC.tellrpc(ID);
                                     ID++;
                                     downloaded=a+downloaded;
-                                    FileWriter fw = new FileWriter("/root/123.txt", true);//写入已下载列表
+                                    FileWriter fw = new FileWriter(System.getProperty("user.dir")+"/Downloaded.log", true);//写入已下载列表
                                     BufferedWriter bw = new BufferedWriter(fw);
                                     bw.write(a);
                                     bw.close();
